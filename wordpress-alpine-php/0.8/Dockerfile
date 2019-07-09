@@ -39,5 +39,10 @@ COPY nginx_conf/. /etc/nginx/conf.d/
 #
 COPY local_bin/. /usr/local/bin/
 RUN chmod -R +x /usr/local/bin
+
+# Add SOAP Client
+RUN apk add --no-cache libxml2-dev
+RUN docker-php-ext-install soap
+
 EXPOSE $SSH_PORT 80
 ENTRYPOINT ["entrypoint.sh"]
